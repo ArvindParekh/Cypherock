@@ -2,9 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-*, html, body{
+*,
+html,
+body {
     min-width: 0;
     margin: 0;
     padding: 0;
+    font-family: 'Avenir LT Std', 'sans-serif';
+}
+
+body {
+    color: white;
     background-color: #0A1018;
 }
