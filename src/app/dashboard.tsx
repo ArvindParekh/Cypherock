@@ -1,17 +1,8 @@
-import { useState } from "react"
 import dashboardData from "../data/dashboard"
-import CustomizedDialogs from "./modal"
+import MaxWidthDialog from "./modal";
 
 export default function Dashboard() {
 
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
 
 
     const synchronizedRow = (
@@ -52,8 +43,7 @@ export default function Dashboard() {
                     <div>{data.crypto}</div>
                     <div>{data.usd}</div>
                     <div>
-                        <button variant="outlined" onClick={handleClickOpen} className="text-[#8484F1]">Receive</button>
-                        <CustomizedDialogs openStatus={open} close={handleClose} />
+                        <MaxWidthDialog />
                         <span className="text-[#CAA276]">Send</span>
                     </div>
                 </div>)

@@ -1,68 +1,100 @@
-import { styled } from '@mui/material/styles';
+import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
 // import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
-// import CloseIcon from '@mui/icons-material/Close';
-// import Typography from '@mui/material/Typography';
+import DialogContent from '@mui/material/DialogContent';
+// import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+// import FormControl from '@mui/material/FormControl';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
+// import Switch from '@mui/material/Switch';
+import { IconButton, styled } from '@mui/material';
 import HorizontalLinearStepper from './stepper';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-        // padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-        // padding: theme.spacing(1),
-    },
-    '& .MuiDialog-paper': {
-        backgroundColor: '#13161A',
-        color: 'white',
-        // width: '886px', // Adjust the width here
-        // height: '561px', // Adjust the height here
-    },
-}));
+export default function MaxWidthDialog() {
+    const [open, setOpen] = React.useState(false);
+    // const [fullWidth, setFullWidth] = React.useState(true);
+    // const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('sm');
 
-export default function CustomizedDialogs({ openStatus, close }) {
+    const BootstrapDialog = styled(Dialog)(() => ({
+        '& .MuiDialogContent-root': {
+            // padding: theme.spacing(2),
+        },
+        '& .MuiDialogActions-root': {
+            // padding: theme.spacing(1),
+        },
+        '& .MuiDialog-paper': {
+            backgroundColor: '#13161A',
+            color: 'white',
+            // width: '886px', // Adjust the width here
+            // height: '561px', // Adjust the height here
+        },
+    }));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    // const handleMaxWidthChange = (event: SelectChangeEvent<typeof maxWidth>) => {
+    //     setMaxWidth(
+    //         // @ts-expect-error autofill of arbitrary value is not handled.
+    //         event.target.value,
+    //     );
+    // };
+
+    // const handleFullWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     setFullWidth(event.target.checked);
+    // };
 
     return (
-        <BootstrapDialog
-            onClose={close}
-            aria-labelledby="customized-dialog-title"
-            open={openStatus}
-            fullWidth={true}
-            maxWidth="md"
-        >
-            <DialogTitle id="customized-dialog-title" className="text-center" sx={{ mt: 4, fontSize: 28, fontWeight: "medium" }}>
-                Receive
-            </DialogTitle>
-            <IconButton
-                aria-label="close"
-                onClick={close}
-                sx={{
-                    position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
-                }}
+        <React.Fragment>
+            <button onClick={handleClickOpen} className="text-[#8484F1]">Receive</button>
+            <BootstrapDialog
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}
+                fullWidth={true}
+                maxWidth="md"
             >
-                <img onClick={close} aria-label='close-button' className='w-5 h-5' src='/close.svg' sx={{
-                    position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
-                }} />
-            </IconButton>
+                <DialogTitle id="customized-dialog-title" className="text-center" sx={{ mt: 4, fontSize: 28, fontWeight: "medium" }}>
+                    Receive
+                </DialogTitle>
+                <IconButton
+                    aria-label="close"
+                    onClick={handleClose}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <img onClick={close} aria-label='close-button' className='w-5 h-5' src='/close.svg' sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }} />
+                </IconButton>
 
-            <DialogContent sx={{ m: 0, p: 0 }}>
-                <HorizontalLinearStepper />
-            </DialogContent>
+                <DialogContent sx={{ m: 0, p: 0 }}>
+                    <HorizontalLinearStepper />
+                </DialogContent>
 
-            {/* <DialogActions>
+                {/* <DialogActions>
                 <Button autoFocus onClick={close}>
                     Save changes
                 </Button>
             </DialogActions> */}
-        </BootstrapDialog>
+            </BootstrapDialog>
+        </React.Fragment>
     );
 }
