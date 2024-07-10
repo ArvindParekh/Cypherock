@@ -34,6 +34,11 @@ const theme = createTheme({
                     '&.Mui-completed': {
                         color: '#E19A4C', // Completed step icon color
                     },
+                    '&': {
+                        borderWidth: '2px', // Default border width
+                        borderColor: 'rgba(255, 255, 255, 0.23)', // Default border color with some transparency
+                        borderRadius: '50%', // Ensures the border is circular for default state
+                    },
                 },
             },
         },

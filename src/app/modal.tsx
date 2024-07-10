@@ -33,7 +33,7 @@ export default function CustomizedDialogs({ openStatus, close }) {
             fullWidth={true}
             maxWidth="md"
         >
-            <DialogTitle id="customized-dialog-title" className="text-center">
+            <DialogTitle id="customized-dialog-title" className="text-center" sx={{ mt: 4, fontSize: 28, fontWeight: "medium" }}>
                 Receive
             </DialogTitle>
             <IconButton
@@ -46,8 +46,14 @@ export default function CustomizedDialogs({ openStatus, close }) {
                     color: (theme) => theme.palette.grey[500],
                 }}
             >
-                {/* <CloseIcon /> */}
+                <img onClick={close} aria-label='close-button' className='w-5 h-5' src='/close.svg' sx={{
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: (theme) => theme.palette.grey[500],
+                }} />
             </IconButton>
+
             <DialogContent sx={{ m: 0, p: 0 }}>
                 <HorizontalLinearStepper />
             </DialogContent>
