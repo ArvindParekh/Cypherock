@@ -20,7 +20,7 @@ function App() {
           })}
         </aside>
 
-        <article className="h-full w-[85%] flex flex-col p-5 gap-5">
+        <article className="h-full w-[85%] flex flex-col p-10 gap-5 border">
           <Dashboard />
         </article>
       </section>

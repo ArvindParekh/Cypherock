@@ -6,7 +6,7 @@ const listItems = (
         </li>
         <li className="flex items-center gap-5">
             <img src="/wallets.svg"></img>
-            <span>Wallets</span>
+            <span className="text-[#E2C19D]">Wallets</span>
         </li>
         <li className="flex items-center gap-5">
             <img src="transactions.svg"></img>
@@ -24,7 +24,7 @@ const listItems = (
 )
 
 const sidebarButton = (
-    <button className="bg-[#E09D54] w-fit px-7 py-2 rounded-lg mb-14">Support</button>
+    <button className="bg-[#785B3C] text-[#F5CEA3] w-fit px-7 py-2 rounded-lg mb-14">Support</button>
 )
 
 const sidebar = [listItems, sidebarButton]

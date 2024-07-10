@@ -42,15 +42,20 @@ export default function HorizontalLinearStepper() {
         setSkipped(newSkipped);
     };
 
-    // const handleBack = () => {
-    //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    // };
-
-
-
     const handleReset = () => {
         setActiveStep(0);
     };
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText('25BKJNKNLJL58fjkdhfk26dnfds15');
+            alert('Address copied to clipboard!');
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            alert('Failed to copy the address.');
+        }
+    };
+    
 
     const getStepContent = (step: number) => {
         switch (step) {
@@ -104,7 +109,8 @@ export default function HorizontalLinearStepper() {
                         </Typography>
                         <div className='w-full h-20 bg-[#FFFFFF]/[4%] border border-gray-50 border-dotted rounded-lg flex items-center justify-evenly my-10'>
                             <h1 className='text-[#E19A4C] font-bold text-2xl'>25BKJNKNLJL58fjkdhfk26dnfds15</h1>
-                            <button className='text-[#E7C49F] bg-[#FFFFFF]/[10%] px-5 py-2 rounded-lg text-center'>Copy</button>
+                            <button onClick={handleCopy} className='text-[#E7C49F] bg-[#FFFFFF]/[10%] px-5 py-2 rounded-lg text-center'>Copy</button>
+
                         </div>
                         <div className='flex items-center gap-3 mt-5 text-[#4848F6]'>
                             <img src='/exclaimation.svg' />
