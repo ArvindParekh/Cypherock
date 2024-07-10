@@ -1,29 +1,29 @@
 import { FormControl, Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import dashboardData from "../data/dashboard";
-import MaxWidthDialog from "./modal";
+import ReceiveModal from "./modal";
 import { useState, useEffect } from "react";
 
 export default function Dashboard() {
-    const [age, setAge] = useState('');
+    const [sortOption, setSortOption] = useState('');
     const [sortedData, setSortedData] = useState(dashboardData);
 
     const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value);
+        setSortOption(event.target.value);
     };
 
     useEffect(() => {
         let sorted = [...dashboardData];
-        switch (age) {
-            case "adfa": // Amount Low - High
+        switch (sortOption) {
+            case "amountLowHigh": // Amount Low - High
                 sorted.sort((a, b) => parseFloat(a.usd.replace('USD ', '')) - parseFloat(b.usd.replace('USD ', '')));
                 break;
-            case "": // Amount High - Low
+            case "amountHighLow": // Amount High - Low
                 sorted.sort((a, b) => parseFloat(b.usd.replace('USD ', '')) - parseFloat(a.usd.replace('USD ', '')));
                 break;
-            case 20: // Arrange A - Z
+            case "az": // Arrange A - Z
                 sorted.sort((a, b) => a.name.localeCompare(b.name));
                 break;
-            case 30: // Arrange Z - A
+            case "za": // Arrange Z - A
                 sorted.sort((a, b) => b.name.localeCompare(a.name));
                 break;
             default:
@@ -31,7 +31,7 @@ export default function Dashboard() {
                 break;
         }
         setSortedData(sorted);
-    }, [age]);
+    }, [sortOption]);
 
     const synchronizedRow = (
         <div className="w-full h-14 flex flex-row-reverse items-center gap-5 mb-6">
@@ -56,7 +56,7 @@ export default function Dashboard() {
             <span className="text-[#ADABAA]">Total coin - 6</span>
             <FormControl sx={{ m: 1, minWidth: 120, color: "white", backgroundColor: "transparent", display: "flex" }}>
                 <Select
-                    value={age}
+                    value={sortOption}
                     onChange={handleChange}
                     displayEmpty
                     inputProps={{ 'aria-label': 'Without label' }}
@@ -86,21 +86,21 @@ export default function Dashboard() {
                             <img src="/half_down_arrow.svg" className="w-5" />
                         </div>
                     </MenuItem>
-                    <MenuItem value={"adfa"} sx={{ color: "#BEB4A8" }}>
+                    <MenuItem value="amountLowHigh" sx={{ color: "#BEB4A8" }}>
                         <div className="flex items-center gap-2">
                             <img src="/up_down_arrow.svg" className="w-5" />
                             <span className="text-[#BEB4A8]">Amount Low - High</span>
                             <img src="/half_down_arrow.svg" className="w-5" />
                         </div>
                     </MenuItem>
-                    <MenuItem value={20} sx={{ color: "#BEB4A8" }}>
+                    <MenuItem value="az" sx={{ color: "#BEB4A8" }}>
                         <div className="flex items-center gap-2">
                             <img src="/up_down_arrow.svg" className="w-5" />
                             <span className="text-[#BEB4A8]">Arrange A - Z</span>
                             <img src="/half_down_arrow.svg" className="w-5" />
                         </div>
                     </MenuItem>
-                    <MenuItem value={30} sx={{ color: "#BEB4A8" }}>
+                    <MenuItem value="za" sx={{ color: "#BEB4A8" }}>
                         <div className="flex items-center gap-2">
                             <img src="/up_down_arrow.svg" className="w-5" />
                             <span className="text-[#BEB4A8]">Arrange Z - A</span>
@@ -124,7 +124,7 @@ export default function Dashboard() {
                         <div>{data.crypto}</div>
                         <div>{data.usd}</div>
                         <div className="flex items-center gap-5">
-                            <MaxWidthDialog />
+                            <ReceiveModal />
                             <div className="flex items-center gap-3 border-l border-l-[#222D3A] pl-5">
                                 <img src="/up_arrow.svg" />
                                 <span className="text-[#CAA276] font-extrabold">SEND</span>

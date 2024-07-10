@@ -47,9 +47,13 @@ const theme = createTheme({
 
 export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = useState(0);
-    const [skipped, setSkipped] = useState(new Set<number>());
+    const [completedSteps, setCompletedSteps] = useState({
+        0: [false, false, false],
+        1: [false],
+        2: [],
+    });
 
-    // const isStepOptional = (step: number) => step === 1;
+    const [skipped, setSkipped] = useState(new Set<number>());
 
     const isStepSkipped = (step: number) => skipped.has(step);
 
@@ -66,6 +70,11 @@ export default function HorizontalLinearStepper() {
 
     const handleReset = () => {
         setActiveStep(0);
+        setCompletedSteps({
+            0: [false, false, false],
+            1: [false],
+            2: [],
+        });
     };
 
     const handleCopy = async () => {
@@ -78,6 +87,15 @@ export default function HorizontalLinearStepper() {
         }
     };
 
+    const toggleStepCompletion = (stepIndex: number) => {
+        const newCompletedSteps = { ...completedSteps };
+        newCompletedSteps[activeStep][stepIndex] = !newCompletedSteps[activeStep][stepIndex];
+        setCompletedSteps(newCompletedSteps);
+    };
+
+    const allStepsCompleted = (step: number) => {
+        return completedSteps[step].every(step => step);
+    };
 
     const getStepContent = (step: number) => {
         switch (step) {
@@ -89,17 +107,17 @@ export default function HorizontalLinearStepper() {
                         </Typography>
                         <div className='flex flex-col justify-center gap-5 mt-5 text-[#8A8B90]'>
 
-                            <div className='bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4'>
+                            <div className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4 ${completedSteps[0][0] ? "completed-step" : ""}`}>
                                 <img src='/arrow.svg' />
-                                <span>Select the Wallet On device</span>
+                                <span className={`${completedSteps[0][0] ? "font-bold text-[#A4A9D6]" : ""}`} onClick={() => toggleStepCompletion(0)}>Select the Wallet On device</span>
                             </div>
-                            <div className='bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4'>
+                            <div className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4 ${completedSteps[0][1] ? "completed-step" : ""}`}>
                                 <img src='/arrow.svg' />
-                                <span>Select the Coin on device</span>
+                                <span className={`${completedSteps[0][1] ? "font-bold text-[#A4A9D6]" : ""}`} onClick={() => toggleStepCompletion(1)}>Select the Coin on device</span>
                             </div>
-                            <div className='bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4'>
+                            <div className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4 ${completedSteps[0][2] ? "completed-step" : ""}`}>
                                 <img src='/arrow.svg' />
-                                <span>Tap 1 card of any 4 Cards</span>
+                                <span className={`${completedSteps[0][2] ? "font-bold text-[#A4A9D6]" : ""}`} onClick={() => toggleStepCompletion(2)}>Tap 1 card of any 4 Cards</span>
                             </div>
 
                         </div>
@@ -116,9 +134,9 @@ export default function HorizontalLinearStepper() {
                         </Typography>
                         <div className='flex flex-col justify-center gap-5 mt-5 text-[#8A8B90]'>
 
-                            <div className='bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4'>
+                            <div className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4 ${completedSteps[1][0] ? "completed-step" : ""}`}>
                                 <img src='/arrow.svg' />
-                                <span>Please match the <span className='font-bold'>address</span> to be shown in X1 Wallet</span>
+                                <span className={`${completedSteps[1][0] ? "font-bold text-[#A4A9D6]" : ""}`} onClick={() => toggleStepCompletion(0)}>Please match the <span className='font-bold'>address</span> to be shown in X1 Wallet</span>
                             </div>
                         </div>
                     </Box>
@@ -132,7 +150,6 @@ export default function HorizontalLinearStepper() {
                         <div className='w-full h-20 bg-[#FFFFFF]/[4%] border border-gray-50 border-dotted rounded-lg flex items-center justify-evenly my-10'>
                             <h1 className='text-[#E19A4C] font-bold text-2xl'>25BKJNKNLJL58fjkdhfk26dnfds15</h1>
                             <button onClick={handleCopy} className='text-[#E7C49F] bg-[#FFFFFF]/[10%] px-5 py-2 rounded-lg text-center'>Copy</button>
-
                         </div>
                         <div className='flex items-center gap-3 mt-5 text-[#4848F6]'>
                             <img src='/exclaimation.svg' />
@@ -144,7 +161,6 @@ export default function HorizontalLinearStepper() {
                                 Re-Verify
                             </Button>
                         </div>
-
                     </Box>
                 );
             default:
@@ -171,7 +187,6 @@ export default function HorizontalLinearStepper() {
         </Stepper>
     );
 
-
     const finalStep = (
         <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1, color: 'white' }}>
@@ -194,7 +209,22 @@ export default function HorizontalLinearStepper() {
                 ) : (
                     <>
                         <Divider sx={{ width: '100%', border: "1px solid #272726" }} />
-                        <Button onClick={handleNext} sx={{ color: '#3E3935', border: "1px solid #3E3935", alignSelf: 'end', my: 2, mr: 7, px: 7, py: 1.5, textTransform: "none", fontWeight: "medium", fontSize: 18 }}> {/* Centered button */}
+                        <Button
+                            onClick={handleNext}
+                            disabled={!allStepsCompleted(activeStep)}
+                            sx={{
+                                color: allStepsCompleted(activeStep) ? '#3E3935' : '#A1A1A1',
+                                border: allStepsCompleted(activeStep) ? "1px solid #3E3935" : "1px solid #A1A1A1",
+                                alignSelf: 'end',
+                                my: 2,
+                                mr: 7,
+                                px: 7,
+                                py: 1.5,
+                                textTransform: "none",
+                                fontWeight: "medium",
+                                fontSize: 18,
+                                backgroundColor: allStepsCompleted(activeStep) ? '#E19A4C' : 'transparent'
+                            }}>
                             Continue
                         </Button>
                     </>
@@ -203,19 +233,15 @@ export default function HorizontalLinearStepper() {
         </React.Fragment>
     );
 
-
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ width: '100%', color: 'white', pt: 3 }}>
-
                 {stepper}
-
                 {activeStep === steps.length ? (
                     finalStep
                 ) : (
                     intermediateSteps
-                )
-                }
+                )}
             </Box >
         </ThemeProvider>
     );

@@ -1,24 +1,12 @@
 import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-// import FormControl from '@mui/material/FormControl';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import Select, { SelectChangeEvent } from '@mui/material/Select';
-// import Switch from '@mui/material/Switch';
 import { IconButton, styled } from '@mui/material';
 import HorizontalLinearStepper from './stepper';
 
-export default function MaxWidthDialog() {
+export default function ReceiveModal() {
     const [open, setOpen] = React.useState(false);
-    // const [fullWidth, setFullWidth] = React.useState(true);
-    // const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('sm');
 
     const BootstrapDialog = styled(Dialog)(() => ({
         '& .MuiDialogContent-root': {
@@ -42,17 +30,6 @@ export default function MaxWidthDialog() {
     const handleClose = () => {
         setOpen(false);
     };
-
-    // const handleMaxWidthChange = (event: SelectChangeEvent<typeof maxWidth>) => {
-    //     setMaxWidth(
-    //         // @ts-expect-error autofill of arbitrary value is not handled.
-    //         event.target.value,
-    //     );
-    // };
-
-    // const handleFullWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     setFullWidth(event.target.checked);
-    // };
 
     return (
         <React.Fragment>
@@ -84,7 +61,7 @@ export default function MaxWidthDialog() {
                         position: 'absolute',
                         right: 8,
                         top: 8,
-                        color: (theme) => theme.palette.grey[500],
+                        // color: (theme) => theme.palette.grey[500],
                     }} />
                 </IconButton>
 
@@ -92,11 +69,6 @@ export default function MaxWidthDialog() {
                     <HorizontalLinearStepper />
                 </DialogContent>
 
-                {/* <DialogActions>
-                <Button autoFocus onClick={close}>
-                    Save changes
-                </Button>
-            </DialogActions> */}
             </BootstrapDialog>
         </React.Fragment>
     );
