@@ -14,13 +14,13 @@ function App() {
       </nav>
 
       <section className="flex items-center justify-center w-full h-full">
-        <aside className="h-full flex flex-col items-center justify-between gap-5 w-[15%] bg-[#161C23]">
+        <aside className="h-full flex flex-col items-center justify-between gap-5 w-[18%] bg-[#161C23] px-10">
           {sidebar.map((sidebarComponent) => {
             return sidebarComponent;
           })}
         </aside>
 
-        <article className="h-full w-[85%] flex flex-col p-10 gap-5 border">
+        <article className="h-full w-[82%] flex flex-col px-24 gap-5">
           <Dashboard />
         </article>
       </section>

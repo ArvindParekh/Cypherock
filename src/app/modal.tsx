@@ -56,7 +56,10 @@ export default function MaxWidthDialog() {
 
     return (
         <React.Fragment>
-            <button onClick={handleClickOpen} className="text-[#8484F1]">Receive</button>
+            <div className="flex items-center gap-3">
+                <img src="/down_arrow.svg" />
+                <button onClick={handleClickOpen} className="text-[#8484F1] font-bold">RECEIVE</button>
+            </div>
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
@@ -77,7 +80,7 @@ export default function MaxWidthDialog() {
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
-                    <img onClick={close} aria-label='close-button' className='w-5 h-5' src='/close.svg' sx={{
+                    <img aria-label='close-button' className='w-5 h-5' src='/close.svg' sx={{
                         position: 'absolute',
                         right: 8,
                         top: 8,

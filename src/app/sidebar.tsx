@@ -1,23 +1,23 @@
 const listItems = (
-    <ul className="list-none space-y-8 mt-20 font-medium text-lg">
-        <li className="flex items-center gap-5">
-            <img src="/portfolio.svg"></img>
+    <ul className="list-none space-y-10 mt-20 font-medium text-xl">
+        <li className="flex items-center gap-6">
+            <img src="/portfolio.svg" className="w-7 h-7"></img>
             <span>Portfolio</span>
         </li>
-        <li className="flex items-center gap-5">
-            <img src="/wallets.svg"></img>
+        <li className="flex items-center gap-6">
+            <img src="/wallets.svg" className="w-7 h-7"></img>
             <span className="text-[#E2C19D]">Wallets</span>
         </li>
-        <li className="flex items-center gap-5">
-            <img src="transactions.svg"></img>
+        <li className="flex items-center gap-6">
+            <img src="transactions.svg" className="w-7 h-7"></img>
             <span>Last Transactions</span>
         </li>
-        <li className="flex items-center gap-5">
-            <img src="tutorials.svg"></img>
+        <li className="flex items-center gap-6">
+            <img src="tutorials.svg" className="w-7 h-7"></img>
             <span>Tutorials</span>
         </li>
-        <li className="flex items-center gap-5">
-            <img src="settings.svg"></img>
+        <li className="flex items-center gap-6">
+            <img src="settings.svg" className="w-7 h-7"></img>
             <span>Setting</span>
         </li>
     </ul>

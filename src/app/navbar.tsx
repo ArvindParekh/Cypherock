@@ -1,6 +1,6 @@
 const navLogo = (
     <div className="ml-5">
-        <img src="/cypherock_icon.svg" />
+        <img src="/cypherock_icon.svg" className="w-48" />
     </div>
 )
 
