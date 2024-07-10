@@ -6,7 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import { Divider } from '@mui/material';
+import { Divider, ThemeProvider, createTheme } from '@mui/material';
 
 const steps = ['Device', 'Verification', 'Receive'];
 
@@ -19,9 +19,26 @@ const CustomStepLabel = styled(StepLabel)(({ theme }) => ({
         color: '#E19A4C', // Active step label color
     },
     '& .MuiStepLabel-label.Mui-completed': {
-        color: 'gray', // Completed step label color
+        color: '#E19A4C', // Completed step label color
     },
 }));
+
+const theme = createTheme({
+    components: {
+        MuiStepIcon: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-active': {
+                        color: '#E19A4C', // Active step icon color
+                    },
+                    '&.Mui-completed': {
+                        color: '#E19A4C', // Completed step icon color
+                    },
+                },
+            },
+        },
+    },
+});
 
 export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = useState(0);
@@ -55,7 +72,7 @@ export default function HorizontalLinearStepper() {
             alert('Failed to copy the address.');
         }
     };
-    
+
 
     const getStepContent = (step: number) => {
         switch (step) {
@@ -147,7 +164,8 @@ export default function HorizontalLinearStepper() {
                 );
             })}
         </Stepper>
-    )
+    );
+
 
     const finalStep = (
         <React.Fragment>
@@ -182,16 +200,18 @@ export default function HorizontalLinearStepper() {
 
 
     return (
-        <Box sx={{ width: '100%', color: 'white', pt: 3 }}>
+        <ThemeProvider theme={theme}>
+            <Box sx={{ width: '100%', color: 'white', pt: 3 }}>
 
-            {stepper}
+                {stepper}
 
-            {activeStep === steps.length ? (
-                finalStep
-            ) : (
-                intermediateSteps
-            )
-            }
-        </Box >
+                {activeStep === steps.length ? (
+                    finalStep
+                ) : (
+                    intermediateSteps
+                )
+                }
+            </Box >
+        </ThemeProvider>
     );
 }
