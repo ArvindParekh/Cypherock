@@ -58,7 +58,7 @@ export default function MaxWidthDialog() {
         <React.Fragment>
             <div className="flex items-center gap-3">
                 <img src="/down_arrow.svg" />
-                <button onClick={handleClickOpen} className="text-[#8484F1] font-bold">RECEIVE</button>
+                <button onClick={handleClickOpen} className="text-[#8484F1] font-extrabold">RECEIVE</button>
             </div>
             <BootstrapDialog
                 onClose={handleClose}
