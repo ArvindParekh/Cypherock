@@ -213,8 +213,8 @@ export default function HorizontalLinearStepper() {
                             onClick={handleNext}
                             disabled={!allStepsCompleted(activeStep)}
                             sx={{
-                                color: allStepsCompleted(activeStep) ? '#3E3935' : '#A1A1A1',
-                                border: allStepsCompleted(activeStep) ? "1px solid #3E3935" : "1px solid #A1A1A1",
+                                color: allStepsCompleted(activeStep) ? '#3E3935' : '#A1A1A1', // Active state color
+                                border: allStepsCompleted(activeStep) ? "1px solid #3E3935" : "1px solid #A1A1A1", // Active state border
                                 alignSelf: 'end',
                                 my: 2,
                                 mr: 7,
@@ -223,10 +223,16 @@ export default function HorizontalLinearStepper() {
                                 textTransform: "none",
                                 fontWeight: "medium",
                                 fontSize: 18,
-                                backgroundColor: allStepsCompleted(activeStep) ? '#E19A4C' : 'transparent'
-                            }}>
+                                backgroundColor: allStepsCompleted(activeStep) ? '#E19A4C' : 'transparent',
+                                '&.Mui-disabled': {
+                                    color: '#A1A1A1', // Disabled state color
+                                    border: "1px solid #A1A1A1", // Disabled state border
+                                }
+                            }}
+                        >
                             Continue
                         </Button>
+
                     </>
                 )}
             </Box>
