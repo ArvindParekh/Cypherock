@@ -153,7 +153,7 @@ export default function Dashboard() {
          {sortedData.map((data, index) => {
             return (
                <div
-                  className='w-full h-[5.2rem] grid grid-cols-4 gap-3 place-items-center bg-[#161C23] text-[#ADABAA] font-bold'
+                  className='w-full h-[5.2rem] grid grid-cols-4 gap-3 place-items-center bg-[#161C23] text-[#ADABAA] font-bold rounded-sm'
                   key={`${data.name}-${index}`}
                >
                   <div className='flex items-center gap-2 place-self-stretch ml-10'>
