@@ -6,12 +6,18 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import { Divider, ThemeProvider, createTheme } from "@mui/material";
-import { motion, useAnimation } from "framer-motion";
+import {
+   Divider,
+   StepConnector,
+   ThemeProvider,
+   createTheme,
+} from "@mui/material";
+import { useAnimation } from "framer-motion";
+import Instruction from "../components/instruction";
 
 const steps = ["Device", "Verification", "Receive"];
 
-const CustomStepLabel = styled(StepLabel)(({ theme }) => ({
+const CustomStepLabel = styled(StepLabel)(() => ({
    "& .MuiStepLabel-label": {
       color: "#A2A1A1", // Step label color when not active or completed
    },
@@ -38,6 +44,7 @@ const theme = createTheme({
                "&": {
                   borderWidth: "2px", // Default border width
                   borderColor: "rgba(255, 255, 255, 0.23)", // Default border color with some transparency
+                  // borderColor: "#707070",
                   borderRadius: "50%", // Ensures the border is circular for default state
                },
             },
@@ -46,9 +53,22 @@ const theme = createTheme({
    },
 });
 
+const customStepConnector = (
+   <StepConnector
+      sx={{
+         [`& .MuiStepConnector-line`]: {
+            borderColor: "#282828", // Replace 'yourColor' with the color you want
+            borderWidth: 1
+         },
+      }}
+   />
+);
+
 export default function HorizontalLinearStepper() {
    const [activeStep, setActiveStep] = useState(0);
-   const [completedSteps, setCompletedSteps] = useState({
+   const [completedSteps, setCompletedSteps] = useState<{
+      [key: number]: boolean[];
+   }>({
       0: [false, false, false],
       1: [false],
       2: [],
@@ -106,11 +126,19 @@ export default function HorizontalLinearStepper() {
          case 0:
             return (
                <Box className=''>
-                  <Typography sx={{ color: "#B1B1B1", fontSize: 20 }}>
+                  <Typography
+                     sx={{
+                        color: "#B1B1B1",
+                        fontSize: 20,
+                        ml: 2,
+                        mb: 5,
+                        fontWeight: "medium",
+                     }}
+                  >
                      Follow the instruction on device
                   </Typography>
                   <div className='flex flex-col justify-center gap-5 mt-5 text-[#8A8B90]'>
-                     <div
+                     {/* <div
                         className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 justify-between`}
                      >
                         <div className='flex items-center gap-4 '>
@@ -155,8 +183,17 @@ export default function HorizontalLinearStepper() {
                               />
                            </motion.svg>
                         )}
-                     </div>
-                     <div
+                     </div> */}
+
+                     <Instruction
+                        toggleInstructionComplete={toggleStepCompletion}
+                        toggleIndex={0}
+                        complete={completedSteps[0][0]}
+                        control={controls}
+                        content='Select the Wallet On device'
+                     />
+
+                     {/* <div
                         className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 justify-between`}
                      >
                         <div className='flex items-center gap-4 '>
@@ -201,8 +238,17 @@ export default function HorizontalLinearStepper() {
                               />
                            </motion.svg>
                         )}
-                     </div>
-                     <div
+                     </div> */}
+
+                     <Instruction
+                        toggleInstructionComplete={toggleStepCompletion}
+                        toggleIndex={1}
+                        complete={completedSteps[0][1]}
+                        control={controls}
+                        content='Select the Coin on device'
+                     />
+
+                     {/* <div
                         className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 justify-between`}
                      >
                         <div className='flex items-center gap-4 '>
@@ -247,14 +293,22 @@ export default function HorizontalLinearStepper() {
                               />
                            </motion.svg>
                         )}
-                     </div>
+                     </div> */}
+
+                     <Instruction
+                        toggleInstructionComplete={toggleStepCompletion}
+                        toggleIndex={2}
+                        complete={completedSteps[0][2]}
+                        control={controls}
+                        content='Tap 1 card of any 4 Cards'
+                     />
                   </div>
                </Box>
             );
          case 1:
             return (
                <Box>
-                  <div className='w-full h-32 bg-[#FFFFFF]/[4%] border border-gray-50 border-dotted rounded-lg flex items-center justify-center my-10'>
+                  <div className='w-full h-32 bg-[#FFFFFF]/[4%] border-[3px] border-[#FFFFFF]/[4%] border-dotted rounded-xl flex items-center justify-center my-10'>
                      <h1 className='text-[#E19A4C] font-bold text-2xl'>
                         25BKJNKNLJL58fjkdhfk26dnfds15
                      </h1>
@@ -264,12 +318,15 @@ export default function HorizontalLinearStepper() {
                         color: "#B1B1B1",
                         fontSize: 20,
                         fontWeight: "medium",
+                        ml: 2,
+                        mt: 7,
+                        mb: 5,
                      }}
                   >
                      Verify address on device
                   </Typography>
                   <div className='flex flex-col justify-center gap-5 mt-5 text-[#8A8B90]'>
-                     <div
+                     {/* <div
                         className={`bg-[#FFFFFF]/[4%] h-12 rounded-lg flex items-center p-7 gap-4 ${
                            completedSteps[1][0] ? "completed-step" : ""
                         }`}
@@ -287,7 +344,15 @@ export default function HorizontalLinearStepper() {
                            <span className='font-bold'>address</span> to be
                            shown in X1 Wallet
                         </span>
-                     </div>
+                     </div> */}
+
+                     <Instruction
+                        toggleInstructionComplete={toggleStepCompletion}
+                        toggleIndex={0}
+                        complete={completedSteps[1][0]}
+                        control={controls}
+                        content='Please match the address to be shown in X1 Wallet'
+                     />
                   </div>
                </Box>
             );
@@ -299,17 +364,18 @@ export default function HorizontalLinearStepper() {
                         color: "#B1B1B1",
                         fontSize: 20,
                         fontWeight: "medium",
+                        ml: 2,
                      }}
                   >
                      Coin Address
                   </Typography>
-                  <div className='w-full h-20 bg-[#FFFFFF]/[4%] border border-gray-50 border-dotted rounded-lg flex items-center justify-evenly my-10'>
-                     <h1 className='text-[#E19A4C] font-bold text-2xl'>
+                  <div className='w-full h-20 bg-[#FFFFFF]/[4%] rounded-lg flex items-center justify-between my-10'>
+                     <h1 className='text-[#E19A4C] font-bold text-2xl ml-10'>
                         25BKJNKNLJL58fjkdhfk26dnfds15
                      </h1>
                      <button
                         onClick={handleCopy}
-                        className='text-[#E7C49F] bg-[#FFFFFF]/[10%] px-5 py-2 rounded-lg text-center'
+                        className='text-[#E7C49F] bg-[#FFFFFF]/[10%] p-3 font-medium rounded-xl text-center mr-5'
                      >
                         Copy
                      </button>
@@ -328,7 +394,7 @@ export default function HorizontalLinearStepper() {
                            border: "1px solid #4848F6",
                            color: "#4848F6",
                            fontSize: 14,
-                           fontWeight: "semibold",
+                           fontWeight: "medium",
                            textTransform: "none",
                            my: 5,
                         }}
@@ -344,7 +410,11 @@ export default function HorizontalLinearStepper() {
    };
 
    const stepper = (
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper
+         activeStep={activeStep}
+         alternativeLabel
+         connector={customStepConnector}
+      >
          {steps.map((label, index) => {
             const stepProps: { completed?: boolean } = {};
             const labelProps: {
@@ -402,7 +472,7 @@ export default function HorizontalLinearStepper() {
                      disabled={!allStepsCompleted(activeStep)}
                      sx={{
                         color: allStepsCompleted(activeStep)
-                           ? "#3E3935"
+                           ? "#ffffff"
                            : "#A1A1A1", // Active state color
                         border: allStepsCompleted(activeStep)
                            ? "1px solid #3E3935"
@@ -413,10 +483,12 @@ export default function HorizontalLinearStepper() {
                         px: 7,
                         py: 1.5,
                         textTransform: "none",
-                        fontWeight: "medium",
+                        fontWeight: allStepsCompleted(activeStep)
+                           ? "bold"
+                           : "medium",
                         fontSize: 18,
                         backgroundColor: allStepsCompleted(activeStep)
-                           ? "#E19A4C"
+                           ? "#8F602C"
                            : "transparent",
                         "&.Mui-disabled": {
                            color: "#A1A1A1", // Disabled state color

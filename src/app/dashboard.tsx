@@ -52,7 +52,7 @@ export default function Dashboard() {
             <img src='lock.svg' className='w-10 h-10' />
             <img src='semicircle.svg' className='w-10 h-10' />
          </div>
-         <div className='flex items-center flex-row-reverse gap-3'>
+         <div className='flex items-center flex-row-reverse gap-4'>
             <span className='text-[#F5CEA3] font-medium'>Synchronized</span>
             <img src='tick.svg' className='w-7 h-7' />
          </div>
@@ -61,16 +61,16 @@ export default function Dashboard() {
 
    const walletRow = (
       <div className='w-full flex items-center justify-between mb-3'>
-         <h1 className='text-[#C78D4E] text-2xl font-extrabold'>Wallet 1</h1>
-         <button className='flex bg-white/[6%] px-7 py-2 rounded-md text-[#BEB4A8]'>
+         <h1 className='text-[#C78D4E] text-3xl font-extrabold'>Wallet 1</h1>
+         <button className='flex bg-white/[6%] px-12 font-medium py-2 rounded-md tracking-wide text-[#BEB4A8]'>
             + Add Coin
          </button>
       </div>
    );
 
    const coinRow = (
-      <div className='w-full h-14 flex items-center justify-between border border-[#161C23] px-4'>
-         <span className='text-[#ADABAA]'>Total coin - 6</span>
+      <div className='w-full h-16 flex items-center justify-between border border-[#161C23] px-4'>
+         <span className='text-[#ADABAA]'>Total Coin - 6</span>
          <div className='flex items-center'>
             <img src='/up_down_arrow.svg' className='w-5' />
             <FormControl
@@ -92,16 +92,19 @@ export default function Dashboard() {
                   MenuProps={{
                      PaperProps: {
                         sx: {
-                           backgroundColor: "#404854",
+                           backgroundColor: "#272A2F",
+                           px: 4,
                            textAlign: "center",
                            color: "#BEB4A8",
                            "& .MuiMenuItem-root": {
-                              backgroundColor: "#404854",
+                              backgroundColor: "#272A2F",
                               "&:hover": {
-                                 backgroundColor: "#505a67",
+                                 // backgroundColor: "#505a67",
                               },
                               "&.Mui-selected": {
-                                 backgroundColor: "#505a67 !important",
+                                 // backgroundColor: "#505a67 !important",
+                                 fontWeight: "bold",
+                                 backgroundColor: "none",
                               },
                            },
                         },
@@ -110,7 +113,7 @@ export default function Dashboard() {
                >
                   <MenuItem
                      value=''
-                     sx={{ color: "#BEB4A8", textAlign: "center" }}
+                     sx={{ color: "#BEB4A8", textAlign: "center", my: 1 }}
                   >
                      <div className='flex items-center gap-2'>
                         <span className='text-[#BEB4A8]'>
@@ -118,19 +121,22 @@ export default function Dashboard() {
                         </span>
                      </div>
                   </MenuItem>
-                  <MenuItem value='amountLowHigh' sx={{ color: "#BEB4A8" }}>
+                  <MenuItem
+                     value='amountLowHigh'
+                     sx={{ color: "#BEB4A8", my: 1 }}
+                  >
                      <div className='flex items-center gap-2'>
                         <span className='text-[#BEB4A8]'>
                            Amount Low - High
                         </span>
                      </div>
                   </MenuItem>
-                  <MenuItem value='az' sx={{ color: "#BEB4A8" }}>
+                  <MenuItem value='az' sx={{ color: "#BEB4A8", my: 1 }}>
                      <div className='flex items-center gap-2'>
                         <span className='text-[#BEB4A8]'>Arrange A - Z</span>
                      </div>
                   </MenuItem>
-                  <MenuItem value='za' sx={{ color: "#BEB4A8" }}>
+                  <MenuItem value='za' sx={{ color: "#BEB4A8", my: 1 }}>
                      <div className='flex items-center gap-2'>
                         <span className='text-[#BEB4A8]'>Arrange Z - A</span>
                      </div>
@@ -147,7 +153,7 @@ export default function Dashboard() {
          {sortedData.map((data, index) => {
             return (
                <div
-                  className='w-full h-20 grid grid-cols-4 gap-3 place-items-center bg-[#161C23] text-[#ADABAA] font-bold'
+                  className='w-full h-[5.2rem] grid grid-cols-4 gap-3 place-items-center bg-[#161C23] text-[#ADABAA] font-bold'
                   key={`${data.name}-${index}`}
                >
                   <div className='flex items-center gap-2 place-self-stretch ml-10'>
@@ -159,8 +165,8 @@ export default function Dashboard() {
                   <div className='flex items-center gap-5'>
                      <ReceiveModal />
                      <div className='flex items-center gap-3 border-l border-l-[#222D3A] pl-5'>
-                        <img src='/up_arrow.svg' />
-                        <span className='text-[#CAA276] font-extrabold'>
+                        <img src='/up_arrow.svg' className='w-3' />
+                        <span className='text-[#CAA276] text-lg font-extrabold'>
                            SEND
                         </span>
                      </div>
